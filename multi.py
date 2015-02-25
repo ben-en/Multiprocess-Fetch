@@ -43,7 +43,8 @@ def worker(pid, oklog, faillog, path, url, thumb, down, extract, metadata,
                 faillog.append(thumb)
         if http.match(down):
             if check_url(down):
-                fetch_file(down, path, md5, 'file')
+                down_name = re.search("([^/.]*\.pdf)", down).group(0)[:-4]
+                fetch_file(down, path, md5, down_name)
             else:
                 print("\nDownload file url check failed!\n%s\n" % down)
                 faillog.append(down)

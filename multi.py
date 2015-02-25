@@ -51,6 +51,9 @@ def worker(pid, oklog, faillog, path, url, thumb, down, extract, metadata,
     else:
         faillog.append(url)
         print("\nUrl check failed!\n'%s'\n" % url)
+    if post:
+        if post == 'storybook':
+            print('Storybook is disabled from the move! Fix it before calling')
         zip_up(md5, path)
         finished = time.time() - start
         oklog.append(url)

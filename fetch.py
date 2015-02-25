@@ -30,13 +30,17 @@ def fetch_file(url, path, md5, filename):
     urllib.request.urlretrieve(url, join(path, md5, '%s.%s' % (filename, ext)))
 
 
-def check_url(url):
+def check_url(url, retries=1):
     '''Simply checks whether a url is valid or not'''
-
-    try:
-        urllib.request.urlopen(url)
-        return(True)
-    except e:
+    for _ in range(retries):
+        try:
+            urllib.request.urlopen(url)
+            return(True)
+        except e:
+            print('Retrying URL...')
+            pass
+    else:
+        print('Url that failed: "' + url + '"')
         return(False)
 
 

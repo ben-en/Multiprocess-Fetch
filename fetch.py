@@ -10,7 +10,7 @@ sys.path.insert(0, join(up(up(abspath(__file__))), 'artexin'))
 from artexin.pack import collect, zipdir
 from artexin.preprocessor_mappings import get_preps
 
-def fetch(url, path, md5, meta):
+def fetch(url, path, md5, extract, meta):
     '''Fetches url with 'collect()'
 
     keep_dir is used to bypass collect()'s tendency to create a zipball then
@@ -19,8 +19,9 @@ def fetch(url, path, md5, meta):
     '''
 
     meta = collect(url, prep=get_preps(url), base_dir=path, meta=meta,
-                   keep_dir=True)
+                   keep_dir=True, do_extract=extract)
     os.remove(join(path, '%s.zip' % md5))
+    return meta
 
 
 def fetch_file(url, path, md5, filename):

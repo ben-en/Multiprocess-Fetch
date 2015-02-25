@@ -35,8 +35,8 @@ if __name__ == '__main__':
     for row in csv_file:
         content.append(row)
 
-    # Begin spooling
-    print(args.edit)
+    # Begin spooling (skips first row which is human readable column
+    #                 identifiers)
     for row in (range(1, len(content))):
         url = content[row][0]
         down = content[row][1]

@@ -14,6 +14,9 @@ if __name__ == '__main__':
                         'made zipfiles')
     parser.add_argument('--edit', metavar='PROCESS', help='script to run on each'
                         'file before zipping it', default=None)
+    parser.add_argument('--extract', dest='extract', action='store_true')
+    parser.add_argument('--no-extract', dest='extract', action='store_false')
+    parser.set_defaults(extract=True)
     args = parser.parse_args()
 
     work_start = time.time()
@@ -49,7 +52,8 @@ if __name__ == '__main__':
 
         p = multiprocessing.Process(target=worker,
                                     args=(row, oklog, faillog, args.path, url,
-                                          thumb, down, meta))
+                                          thumb, down, args.extract, meta,
+                                          args.edit))
         jobs.append(p)
         p.start()
 

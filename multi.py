@@ -54,9 +54,5 @@ def worker(pid, oklog, faillog, path, url, thumb, down, extract, metadata,
         zip_up(md5, path)
         finished = time.time() - start
         oklog.append(url)
-    else:
-        faillog.append(url)
-        print("\nUrl check failed!\n%s\n" % url)
-    shutil.rmtree(join(path, md5))
-    print('[PID: %s] Completed successfully in %ss.' % (pid, finished))
+        shutil.rmtree(join(path, md5))
         print('[PID: %s] Completed successfully in %ss.' % (pid, finished))

@@ -13,7 +13,8 @@ def hash_url(url):
     return md5.hexdigest()
 
 
-def worker(pid, oklog, faillog, path, url, thumb, down, metadata):
+def worker(pid, oklog, faillog, path, url, thumb, down, extract, metadata,
+           post):
     '''Process to be run by main.py
 
     Arguments taken:
@@ -32,8 +33,8 @@ def worker(pid, oklog, faillog, path, url, thumb, down, metadata):
     md5 = hash_url(url)
 
     print("[PID:%s] Processing '%s'" % (pid, url))
-    if check_url(url):
-        meta = fetch(url, path, md5, metadata)
+    if check_url(url, 5):
+        meta = fetch(url, path, md5, extract, metadata)
         if http.match(thumb):
             if check_url(thumb):
                 fetch_file(thumb, path, md5, 'thumbnail')

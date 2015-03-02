@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 if __name__ == '__main__':
     """Multiprocess ArtExIn RSS feed extractor.
 
-    Extracts from a file named "links"
+    Extracts from a file named "links" and builds a list of urls to rip
     """
     parser = argparse.ArgumentParser(description='Multiprocess script to '
                                      'extract preformatted data')

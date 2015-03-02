@@ -41,8 +41,7 @@ if __name__ == '__main__':
     faillog = manager.list()
 
     # This is where filters to find links we want are assigned.
-    http = re.compile('^http\:\/\/feeds')
-    info = re.compile('^http\:\/\/www\.plosone\.org\/article\/info')
+    http = re.compile('^http\:\/\/www')
     failed_urls = open('failed.urls', 'w')
     succeeded_urls = open('succeeded.urls', 'w')
 
@@ -65,7 +64,7 @@ if __name__ == '__main__':
             print(link)
 
             # And this is where filters are checked against links
-            if http.search(link) or info.search(link):
+            if http.search(link):
                 content.append(link)
 #               aa_list.append(link)
         f = open('urls-%s' % i, 'w')

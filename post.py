@@ -1,3 +1,25 @@
+from os.path import join
+
+
+def news24(md5, path):
+    from bs4 import BeautifulSoup
+    final_list = []
+    final_list.append('''
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<meta content="text/html; charset='utf-8'" name="http-equiv"/>
+''')
+    final_list.append('<body>')
+    html = open(join(path, md5, 'index.html'), 'r')
+    soup = BeautifulSoup(html)
+    main_div = soup.find("div", {"class": "grid_8 article_body"})
+    final_list.append(main_div.prettify())
+    final_list.append('</body>')
+    final = '\n'.join(final_list)
+    html = open(join(path, md5, 'index.html'), 'w')
+    html.write(final)
+    html.close()
+
 
 def storybook():
     # Needs to be rewritten because it was moved

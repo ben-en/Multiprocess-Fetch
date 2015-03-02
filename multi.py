@@ -60,6 +60,8 @@ def worker(pid, oklog, faillog, path, url, thumb, down, extract, metadata,
     if post:
         if post == 'storybook':
             print('Storybook is disabled from the move! Fix it before calling')
+        elif post == 'news24':
+            news24(md5, path)
         zip_up(md5, path)
         finished = time.time() - start
         oklog.append(url)

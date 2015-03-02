@@ -4,6 +4,7 @@ import shutil
 import hashlib
 from os.path import join
 
+from post import news24
 from fetch import fetch, fetch_file, check_url, zip_up
 
 

@@ -19,12 +19,15 @@ def worker(pid, oklog, faillog, path, url, thumb, down, extract, metadata,
     '''Process to be run by main.py
 
     Arguments taken:
+        'pid'      ->  Number to put next to terminal output
         'oklog'    ->  Dictionary to put successful urls into
         'faillog'  ->  List to put failed urls into
-        'url'      ->  Link to site to zip [str]
         'path'     ->  Path to create zipfiles in [str]
+        'url'      ->  Link to site to zip [str]
         'thumb'    ->  Url to thumbnail (if page doesn't have any images) [str]
+        'down'     ->  Url to file to download
         'metadata' ->  Dict of metadata to include in zipfile
+        'post'     ->  Function to run after downlaod to clean content
 
     Logs start time, checks url, downloads url, checks for extra files,
     downloads them if necessary, and zips everything up.

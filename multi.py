@@ -39,19 +39,21 @@ def worker(pid, oklog, faillog, path, url, thumb, down, extract, metadata,
     print("[PID:%s] Processing '%s'" % (pid, url))
     if check_url(url, 5):
         meta = fetch(url, path, md5, extract, metadata)
-        if http.match(thumb):
-            if check_url(thumb):
-                fetch_file(thumb, path, md5, 'thumbnail')
-            else:
-                print("\nThumbnail url check failed!\n%s\n" % thumb)
-                faillog.append(thumb)
-        if http.match(down):
-            if check_url(down):
-                down_name = re.search("([^/.]*\.pdf)", down).group(0)[:-4]
-                fetch_file(down, path, md5, down_name)
-            else:
-                print("\nDownload file url check failed!\n%s\n" % down)
-                faillog.append(down)
+        if thumb:
+            if http.match(thumb):
+                if check_url(thumb):
+                    fetch_file(thumb, path, md5, 'thumbnail')
+                else:
+                    print("\nThumbnail url check failed!\n%s\n" % thumb)
+                    faillog.append(thumb)
+        if down:
+            if http.match(down):
+                if check_url(down):
+                    down_name = re.search("([^/.]*\.pdf)", down).group(0)[:-4]
+                    fetch_file(down, path, md5, down_name)
+                else:
+                    print("\nDownload file url check failed!\n%s\n" % down)
+                    faillog.append(down)
     else:
         faillog.append(url)
         print("\nUrl check failed!\n'%s'\n" % url)
